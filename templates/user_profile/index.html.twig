@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier votre profil{% endblock %}
+
+{% block body %}
+    <h1>Modifier votre profil</h1>
+
+    {% for label, messages in app.flashes %}
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+    <div>
+        {{ form_row(form.email, {'label': 'Email'}) }}
+    </div>
+    <div>
+        {{ form_row(form.adresse, {'label': 'Adresse'}) }}
+    </div>
+    <div>
+        {{ form_row(form.num_telephone, {'label': 'Numéro de téléphone'}) }}
+    </div>
+    <div>
+        {{ form_row(form.nom_prenom, {'label': 'Nom et prénom'}) }}
+    </div>
+    <div>
+        {{ form_row(form.poste, {'label': 'Poste'}) }}
+    </div>
+    <hr>
+    <div>
+        {{ form_row(form.old_password, {'label': 'Ancien mot de passe'}) }}
+    </div>
+    <div>
+        {{ form_row(form.plainPassword.first, {'label': 'Nouveau mot de passe'}) }}
+    </div>
+    <div>
+        {{ form_row(form.plainPassword.second, {'label': 'Confirmer le nouveau mot de passe'}) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    {{ form_end(form) }}
+{% endblock %}

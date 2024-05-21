@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du livre {{ livre.titre }}{% endblock %}
+
+{% block body %}
+  
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="text-center">
+                <h2 class="mb-4">Détail du livre</h2>
+                <img src="{{ livre.image }}" class="img-fluid rounded" alt="Image de livre">
+            </div>
+        </div>
+        <div class="col-md-6" style="">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ livre.titre | capitalize }}</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Éditeur :</strong> {{ livre.editeur }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Prix :</strong> {{ livre.prix }} DT
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Auteur :</strong> {{ livre.autheur }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Catégorie :</strong> {{ livre.Categorie.libelle }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Date d'édition :</strong> {{ livre.editedAt|date('d/m/Y') }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Résumé :</strong> 
+                            <p>{{ livre.resumer }}</p>
+                        </li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href='{{ path('panier_ajouter', {'id': livre.id}) }}' class="btn btn-primary">Ajouter au panier</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

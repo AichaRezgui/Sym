@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Résultats de la recherche</h1>
+
+    {% if livres is not empty %}
+        <div class="row">
+            {% for livre in livres %}
+                <div class="col-sm-3 mb-4">
+                    <div class="card">
+                        <a href="{{ path('app_livre_details', {'id': livre.id}) }}" class="card-link">
+                            <img src="{{ livre.image }}" class="card-img-top" alt="Image de livre" style="height: 260px; object-fit: cover;">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ livre.titre | capitalize }}</h5>
+                            <p class="card-text">{{ livre.prix }} DT <br> Catégorie : {{ livre.Categorie.libelle }}</p>
+                            <button onclick="window.location='{{ path('panier_ajouter', {'id': livre.id}) }}'" class="btn btn-success">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucun résultat trouvé pour votre recherche.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des commandes</h1>
+
+    {% for label, messages in app.flashes %}
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Référence</th>
+                <th>Utilisateur</th>
+                <th>État</th>
+                <th>Date de création</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for commande in commandes %}
+                <tr>
+                    <td>{{ commande.reference }}</td>
+                    <td>{{ commande.user.email }}</td>
+                    <td>
+                        <span class="badge {% if commande.etat == 'Terminée' %}bg-success{% elseif commande.etat == 'en cours' %}bg-warning{% endif %}">
+                            {{ commande.etat }}
+                        </span>
+                    </td>
+                    <td>{{ commande.dateCreation ? commande.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('delete_commande', {'id': commande.id}) }}" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
